@@ -1,6 +1,7 @@
 
 const bodyParser = require("body-parser");
 const express = require("express");
+const bcrypt = require("bcrypt");
 const app = express();
 const ejs = require("ejs");
 const mongoose = require("mongoose");
@@ -8,6 +9,7 @@ const session = require("express-session");
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
 const http = require('http').createServer(app)
+const saltRounds=10;
 
 
 const PORT = process.env.PORT || 3000
@@ -92,6 +94,7 @@ app.get("/logout", function (req, res) {
         }else{
             res.redirect("course");
         }
+        
     });
 });
 app.get("/community", function (req, res) {
@@ -114,62 +117,65 @@ app.get("/community", function (req, res) {
 
 app.post("/register", function (req, res) {
 
-    Student.register({name:req.body.personName,username:req.body.username},req.body.password,function(err,student){
-        if(err){
-            console.log(err);
-            res.redirect("/register");
-        }else{
-            passport.authenticate("local")(req,res,function(){
-                res.redirect("/community");
-            });
-        }
-    });
-
-    // bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
-    //     const newStudent = new Student({
-    //         email: req.body.username,
-    //         password: hash
-    //     });
-    //     newStudent.save(function (err) {
-    //         if (err) {
-    //             console.log(err);
-    //         } else {
-    //             res.render("community");
-    //         }
-    //     });
+    // Student.register({name:req.body.personName,username:req.body.username},req.body.password,function(err,student){
+    //     if(err){
+    //         console.log(err);
+    //         res.redirect("/register");
+    //     }else{
+    //         passport.authenticate("local")(req,res,function(){
+    //             res.redirect("/community");
+    //         });
+    //     }
     // });
+
+    bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
+        const newStudent = new Student({
+            email: req.body.username,
+            name: req.body.personName,
+            password: hash
+        });
+        newStudent.save(function (err) {
+            if (err) {
+                console.log(err);
+            } else {
+                res.render("login");
+            }
+        });
+    });
 
 });
 app.post("/login", function (req, res) {
 
-    const student = new Student({
-    username : req.body.username,
-    password : req.body.password
-    });
+    // const student = new Student({
+    username = req.body.username;
+    password = req.body.password;
+    // });
 
-    req.login(student, function(err){
-        if(err){
-            console.log(err);
-        }else{
-            passport.authenticate("local")(req,res,function(){
-                res.redirect("/community");
-            });
-        }
-    });
-
-    // Student.findOne({ email: username }, function (err, foundStudent) {
-    //     if (err) {
+    // req.login(student, function(err){
+    //     if(err){
     //         console.log(err);
-    //     } else {
-    //         if (foundStudent) {
-    //             bcrypt.compare(password, foundStudent.password, function (err, result) {
-    //                 if (result === true) {
-    //                     res.render("community");
-    //                 }
-    //             });
-    //         }
+    //     }else{
+    //         passport.authenticate("local")(req,res,function(){
+    //             res.redirect("/community");
+                
+    //         });
     //     }
     // });
+
+    Student.findOne({ email: username }, function (err, foundStudent) {
+        if (err) {
+            console.log(err);
+        } else {
+            if (foundStudent) {
+                bcrypt.compare(password, foundStudent.password, function (err, result) {
+                    if (result === true) {
+                        console.log(foundStudent.name);
+                        res.render("community",{yourName:foundStudent.name});
+                    }
+                });
+            }
+        }
+    });
 });
 
 // app.post("/submit",function(req,res){
