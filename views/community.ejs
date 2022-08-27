@@ -121,6 +121,7 @@
             <button><span>LOGOUT</span></button>
         </a>
     </div>
+    <h1 >Welcome <span id="nameVar"> <%=yourName%></span></h1>
     <section class="chat__section">
         <div class="brand">
             <img height="40" src="./assets/images/logo.png" alt="">
@@ -135,12 +136,13 @@
     <!-- <script src="public/js/client.js"></script> -->
     <script>
         const socket = io()
-        let name;
+        
+        let name=document.getElementById("nameVar").innerHTML;;
         let textarea = document.querySelector('#textarea')
         let messageArea = document.querySelector('.message__area')
-        do {
-            name = prompt('Please enter your name: ')
-        } while (!name)
+        // do {
+        //     name = prompt('Please enter your name: ')
+        // } while (!name)
 
         textarea.addEventListener('keyup', (e) => {
             if (e.key === 'Enter') {
