@@ -77,24 +77,27 @@
 
         .examcard ul li {
             list-style: disc;
-            
+
             /* padding-left: 15px; */
         }
-        user agent stylesheet
-ul li::marker {
-    unicode-bidi: isolate;
-    font-variant-numeric: tabular-nums;
-    text-transform: none;
-    text-indent: 0px !important;
-    text-align: start !important;
-    text-align-last: start !important;
-    padding-left: 15px;
-}
+
+        user agent stylesheet ul li::marker {
+            unicode-bidi: isolate;
+            font-variant-numeric: tabular-nums;
+            text-transform: none;
+            text-indent: 0px !important;
+            text-align: start !important;
+            text-align-last: start !important;
+            padding-left: 15px;
+        }
 
         .examcard a {
             display: inline;
         }
 
+        .examcard{
+            height: 600px;
+        }
         .examcard button {
             width: 130px;
             text-align: center;
@@ -120,7 +123,7 @@ ul li::marker {
             left: 0px;
             font-size: 1.5rem;
             background-color: #7F6EFC;
-
+            z-index: 10;
         }
 
         .subNavList {
@@ -131,6 +134,32 @@ ul li::marker {
         .subNavList:hover {
             background-color: hsl(216, 98%, 52%);
         }
+        .whichsubject{
+            width: 100%;
+            background: url(../public/images/parallex-2.jpg);
+            text-align: center;
+            background-attachment: fixed;
+            font-weight: 800;
+            color: #7F6EFC;
+            text-shadow: 0px 1px 3px rgba(255, 255, 255, 0.342);
+            background-size: 100%;
+            background-repeat: repeat-y;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: sticky;
+            top: 110px;
+            box-shadow: 0px 2px 5px rgba(128, 128, 128, 0.527);
+        }
+        /* .whichsubject .overlay2{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.178);
+        } */
     </style>
 </head>
 
@@ -159,7 +188,7 @@ ul li::marker {
                     <a href="about">About Us</a>
                 </li>
                 <li class="nav-item">
-                    <a href="course">Courses</a>
+                    <a href="course">Exams</a>
                 </li>
                 <li class="nav-item">
                     <a href="community">Community</a>
@@ -219,6 +248,10 @@ ul li::marker {
 
     <div class="classContent">
         <h1 style="text-align: center; margin: 20px;">CLASS 6th EXAMS</h1>
+        <div class="whichsubject">
+            <div class="overlay2"></div>
+            <h1>ENGLISH</h1>
+        </div>
         <div class="classOuterDiv">
             <div class="examcard">
                 <div class="examHead">
@@ -331,7 +364,7 @@ ul li::marker {
                 <div class="examInfo">
                     <p>Conducted by: Indian Talent Olympiad</p> <br>
                     <p>
-        
+
                         Exam Details:
                     <ol>
                         <li>
@@ -340,7 +373,7 @@ ul li::marker {
                                 <li>Section-1: Subjective Exercise</li>
                                 <li>Section-2: Mental Ability Exercise</li>
                                 <li>Section-3: Answers and Explanation</li>
-                                
+
                             </ul>
                         </li>
                         <li>Total questions: 50</li>
@@ -351,9 +384,14 @@ ul li::marker {
                                 HERE</a>
                         </li>
                     </ol>
-                    <a href="https://www.indiantalent.org/international-computer-olympiad/class-6"><button>CLICK HERE</button></a>
+                    <a href="https://www.indiantalent.org/international-computer-olympiad/class-6"><button>CLICK
+                            HERE</button></a>
                     </p>
                 </div>
+            </div>
+            <div class="whichsubject">
+                <div class="overlay2"></div>
+                <h1>MATHS</h1>
             </div>
             <div class="examcard">
                 <div class="examHead">
