@@ -33,6 +33,7 @@
 
         body {
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
@@ -121,23 +122,31 @@
             <button><span>LOGOUT</span></button>
         </a>
     </div>
-    <h1 >Welcome <span id="nameVar"> <%=yourName%></span></h1>
-    <section class="chat__section">
-        <div class="brand">
-            <img height="40" src="./assets/images/logo.png" alt="">
-            <h1>ABHYUDAYA COMMUNITY</h1>
-        </div>
-        <div class="message__area"></div>
-        <div>
-            <textarea id="textarea" cols="30" rows="1" placeholder="Write a message..."></textarea>
-        </div>
-    </section>
+    <h1> <span> Welcome</span> <span id="nameVar">
+            <%=yourName%>
+        </span></h1>
+    <div class="outerBox">
+        <section class="gidelines_section">
+            <li><p>The name of our contributers are mentioned in all capital in the format <b>ADMIN_XYZ</b></p></li>
+            <li><p></p></li>
+        </section>
+        <section class="chat__section">
+            <div class="brand">
+                <img height="40" src="./assets/images/logo.png" alt="">
+                <h1>ABHYUDAYA COMMUNITY</h1>
+            </div>
+            <div class="message__area"></div>
+            <div>
+                <textarea id="textarea" cols="30" rows="1" placeholder="Write a message..."></textarea>
+            </div>
+        </section>
+    </div>
     <script src="/socket.io/socket.io.js"></script>
     <!-- <script src="public/js/client.js"></script> -->
     <script>
         const socket = io()
-        
-        let name=document.getElementById("nameVar").innerHTML;;
+
+        let name = document.getElementById("nameVar").innerHTML;;
         let textarea = document.querySelector('#textarea')
         let messageArea = document.querySelector('.message__area')
         // do {

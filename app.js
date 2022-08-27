@@ -2,6 +2,7 @@
 const bodyParser = require("body-parser");
 const express = require("express");
 const bcrypt = require("bcrypt");
+var md5 = require('md5');
 const app = express();
 const ejs = require("ejs");
 const mongoose = require("mongoose");
@@ -47,10 +48,17 @@ const studentSchema = new mongoose.Schema({
     password: String,
     secret:String
 });
+const adminSchema = new mongoose.Schema({
+    name:String,
+    email: String,
+    password: String,
+    secret:String
+});
 
 studentSchema.plugin(passportLocalMongoose);
 
 const Student = new mongoose.model("Student", studentSchema);
+const Admin = new mongoose.model("Admin", adminSchema);
 
 passport.use(Student.createStrategy());
 passport.serializeUser(Student.serializeUser());
@@ -79,6 +87,9 @@ app.get("/register", function (req, res) {
 });
 app.get("/contact", function (req, res) {
     res.render("contact");
+});
+app.get("/loginAsAdmin", function (req, res) {
+    res.render("adminLogin");
 });
 app.get("/submit", function (req, res) {
     if (req.isAuthenticated()){
@@ -173,6 +184,39 @@ app.post("/login", function (req, res) {
                         res.render("community",{yourName:foundStudent.name});
                     }
                 });
+            }
+        }
+    });
+});
+app.post("/adminLogin", function (req, res) {
+
+    // const student = new Student({
+    username = req.body.username;
+    password = md5(req.body.password);
+    console.log(password);
+    // });
+
+    // req.login(student, function(err){
+    //     if(err){
+    //         console.log(err);
+    //     }else{
+    //         passport.authenticate("local")(req,res,function(){
+    //             res.redirect("/community");
+                
+    //         });
+    //     }
+    // });
+
+    Admin.findOne({ email: username }, function (err, foundAdmin) {
+        if(err){
+            console.log(err);
+        } else {
+            if(foundAdmin){
+                if(foundAdmin){
+                    if(foundAdmin.password===password){
+                        res.render("community",{yourName:foundAdmin.name});
+                    }
+                }
             }
         }
     });
