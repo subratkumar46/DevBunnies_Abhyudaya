@@ -69,8 +69,8 @@ app.get("/course", function (req, res) {
 app.get("/class7", function (req, res) {
     res.render("class7th");
 });
-app.get("/class8", function (req, res) {
-    res.render("class8th");
+app.get("/class6", function (req, res) {
+    res.render("class6th");
 });
 app.get("/register", function (req, res) {
     res.render("login");
@@ -90,7 +90,7 @@ app.get("/logout", function (req, res) {
         if(err){
             console.log(err);
         }else{
-            res.redirect("/");
+            res.redirect("course");
         }
     });
 });
