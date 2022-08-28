@@ -410,6 +410,11 @@
                 bottom: 28%;
                 left: 50%;
             }
+
+            form a {
+                text-decoration: none;
+                color: #7F6EFC;
+            }
         }
     </style>
     <title>Sign in & Sign up Form</title>
@@ -445,13 +450,16 @@
                             <i class="fab fa-linkedin-in"></i>
                         </a>
                     </div>
-                    <a href="loginAsAdmin"><p class="social-text">Login as an Admin >></p></a>
+                    <a href="loginAsAdmin">
+                        <p class="social-text">Login as an Admin >></p>
+                    </a>
                 </form>
-                <form action="/register" method="POST" class="sign-up-form" autocomplete="off">
+                <form action="/register" name="myForm" id="userRegisterForm" onsubmit="return validateForm()" method="POST"
+                    class="sign-up-form" autocomplete="off">
                     <h2 class="title">Sign up</h2>
                     <div class="input-field">
                         <i class="fas fa-user"></i>
-                        <input type="text" name="personName" placeholder="Name" />
+                        <input type="text" id="rName" name="personName" placeholder="Name" />
                     </div>
                     <div class="input-field">
                         <i class="fas fa-envelope"></i>
@@ -461,7 +469,7 @@
                         <i class="fas fa-lock"></i>
                         <input type="password" name="password" placeholder="Password" />
                     </div>
-                    <input type="submit" class="btn" value="Sign up" />
+                    <button type="submit" class="btn">SIGN UP</button>
                     <p class="social-text">Or Sign up with social platforms</p>
                     <div class="social-media">
                         <a href="#" class="social-icon">
@@ -477,6 +485,9 @@
                             <i class="fab fa-linkedin-in"></i>
                         </a>
                     </div>
+                    <a href="contact">
+                        <p class="social-text">Register as an Admin >></p>
+                    </a>
                 </form>
             </div>
         </div>
@@ -512,6 +523,8 @@
     </div>
 
     <script>
+        // const form = document.getElementById('userRegisterForm');
+
         const sign_in_btn = document.querySelector("#sign-in-btn");
         const sign_up_btn = document.querySelector("#sign-up-btn");
         const container = document.querySelector(".container");
@@ -523,6 +536,14 @@
         sign_in_btn.addEventListener("click", () => {
             container.classList.remove("sign-up-mode");
         });
+
+        function validateForm() {
+            let x = document.forms["myForm"]["personName"].value;
+            if (x.substring(0, 5) == "ADMIN") {
+                alert("This name is not allowed");
+                return false;
+            }
+        }
     </script>
 </body>
 
