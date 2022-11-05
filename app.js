@@ -15,8 +15,15 @@ const saltRounds=10;
 
 const PORT = process.env.PORT || 3000
 
-http.listen(PORT, () => {
-    console.log(`Listening on port ${PORT}`)
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 3000;
+}
+app.listen(port);
+
+
+http.listen(port, () => {
+    console.log(`Listening on port ${port}`)
 })
 
 // const bcrypt = require("bcrypt");
@@ -40,7 +47,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect("mongodb://localhost:27017/abhyudayaDB");
+mongoose.connect("mongodb+srv://admin_subrat:speedV4s@cluster0.42ufxtb.mongodb.net/abhyudayaDB");
 
 const studentSchema = new mongoose.Schema({
     name:String,
